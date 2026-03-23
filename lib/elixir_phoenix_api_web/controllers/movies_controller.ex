@@ -56,9 +56,9 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
             conn
             |> put_status(:ok)
             |> json(%{data: "Success"})
-          {:error, _changeset}
+          {:error, :changeset} ->
             conn
-            |> put_status(:unprocessed_entity)
+            |> put_status(:unproccessed_entity)
             |> json(%{error: "unable to delete"})
         end
     end
