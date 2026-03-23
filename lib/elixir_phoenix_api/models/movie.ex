@@ -2,6 +2,7 @@ defmodule ElixirPhoenixApi.Models.Movie do
 
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, only: [:id, :title, :year, :director, :inserted_at, :updated_at]}
 
   #define a struct for movie
   schema "movies" do

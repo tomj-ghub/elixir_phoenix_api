@@ -12,8 +12,16 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
   def createMovie(conn, %{"movie" => movie_params}) do
     changeset = Movie.changeset(%Movie{}, movie_params)
 
+    #taj temp
+    atom_params =
+      movie_params
+      |> Enum.map(fn {k, v} ->
+        {String.to_existing_atom(k),v}
+      end)
+
     case Repo.insert(changeset,
-      on_conflict: [set: Map.to_list(movie_params)],
+      #on_conflict: [set: Map.to_list(movie_params)],
+      on_conflict: [set: atom_params],
       conflict_target: [:title],
       returning: true) do
 
@@ -23,7 +31,7 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
           |> json(%{data: movie})
 
         {:error, changeset} ->
-          
+
           conn
           |> put_status(:unprocessable_entity)
           |> json(%{errors: "something went wrong"})
