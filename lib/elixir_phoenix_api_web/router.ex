@@ -11,6 +11,8 @@ defmodule ElixirPhoenixApiWeb.Router do
     get "/movies", MoviesController, :getAll
     get "/movie/:id", MoviesController, :getOne
     post "/movie", MoviesController, :upsertMovie
+    #TAJ TODO
+    #post "/movie/search/:title", MoviesController, :searchMovie
     delete "/movie/:id", MoviesController, :deleteOne
   end
 

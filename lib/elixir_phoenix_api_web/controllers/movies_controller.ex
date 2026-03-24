@@ -63,4 +63,8 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
         end
     end
   end
+
+  ##TAJ TODO
+  #def searchMovie(conn, %{"title" = title2Search}) do
+  #end
 end
