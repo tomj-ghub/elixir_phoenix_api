@@ -10,9 +10,8 @@ defmodule ElixirPhoenixApiWeb.Router do
     pipe_through :api
     get "/movies", MoviesController, :getAll
     get "/movie/:id", MoviesController, :getOne
+    get "/movie/search/:title", MoviesController, :searchMovie
     post "/movie", MoviesController, :upsertMovie
-    #TAJ TODO
-    #post "/movie/search/:title", MoviesController, :searchMovie
     delete "/movie/:id", MoviesController, :deleteOne
   end
 

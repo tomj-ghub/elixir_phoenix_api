@@ -4,6 +4,7 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
 
   alias ElixirPhoenixApi.Models.Movie
   alias ElixirPhoenixApi.Repo
+  alias ElixirPhoenixApiWeb.SearchHelper
 
   def getOne(conn, %{"id" => id}) do
     movie = Repo.get(Movie, id)
@@ -64,7 +65,14 @@ defmodule ElixirPhoenixApiWeb.MoviesController do
     end
   end
 
-  ##TAJ TODO
-  #def searchMovie(conn, %{"title" = title2Search}) do
-  #end
+  def searchMovie(conn, %{"title" => titleToSearch}) do
+    movies = Repo.all(Movie)
+    filtered = movies
+      |> Enum.filter(fn movie ->
+        distance = SearchHelper.levenshtein_distance(titleToSearch, movie.title)
+        distance <= 3
+      end)
+
+    json(conn, %{data: filtered})
+  end
 end

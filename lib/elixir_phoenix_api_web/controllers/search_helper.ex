@@ -1,6 +1,12 @@
 defmodule ElixirPhoenixApiWeb.SearchHelper do
 
-  def compute_distance(word1, word2) do
+  def levenshtein_distance(word1, word2) do
+    matrix = compute_matrix(word1, word2)
+    List.last(matrix)
+      |> List.last()
+  end
+
+  def compute_matrix(word1, word2) do
 
     w1 = String.graphemes(word1)
     w2 = String.graphemes(word2)
