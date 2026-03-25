@@ -9,10 +9,10 @@ defmodule ElixirPhoenixApiWeb.Router do
 
     pipe_through :api
 
-    get "/movie/:id", MoviesController, :getOne
-    get "/movie/search/:title", MoviesController, :searchMovie
-    post "/movie", MoviesController, :upsertMovie
-    delete "/movie/:id", MoviesController, :deleteOne
+    get "/:id", MoviesController, :getOne
+    get "/search/:title", MoviesController, :searchMovie
+    post "/", MoviesController, :upsertMovie
+    delete "/:id", MoviesController, :deleteOne
 
   end
 
@@ -20,7 +20,7 @@ defmodule ElixirPhoenixApiWeb.Router do
 
     pipe_through :api
 
-    get "/movies", MoviesController, :getAll
+    get "/", MoviesController, :getAll
 
   end
 
@@ -28,9 +28,9 @@ defmodule ElixirPhoenixApiWeb.Router do
 
     pipe_through :api
 
-    get "/:shortUrl", UrlController, :getShort
     post "/shorten", UrlController, :shorten
-    
+    get "/:shortUrl", UrlController, :getShort
+
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
