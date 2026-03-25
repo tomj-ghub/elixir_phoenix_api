@@ -5,14 +5,32 @@ defmodule ElixirPhoenixApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ElixirPhoenixApiWeb do
+  scope "/movie", ElixirPhoenixApiWeb do
 
     pipe_through :api
-    get "/movies", MoviesController, :getAll
+
     get "/movie/:id", MoviesController, :getOne
     get "/movie/search/:title", MoviesController, :searchMovie
     post "/movie", MoviesController, :upsertMovie
     delete "/movie/:id", MoviesController, :deleteOne
+
+  end
+
+  scope "/movies", ElixirPhoenixApiWeb do
+
+    pipe_through :api
+
+    get "/movies", MoviesController, :getAll
+
+  end
+
+  scope "/", ElixirPhoenixApiWeb do
+
+    pipe_through :api
+
+    get "/:shortUrl", UrlController, :getShort
+    post "/shorten", UrlController, :shorten
+    
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
